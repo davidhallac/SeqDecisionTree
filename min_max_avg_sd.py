@@ -45,9 +45,23 @@ def min_max_avg_sd(stats, n):
 	return np.concatenate((result_min, result_max, result_avg_sd))
 
 
+import math 
+def col_ref_matrix(n):
+	window = 1
+	result1 = range(n)
+	result2 = range(n)
+	size = n
+	for iter in range(math.floor(math.log(n, 2))):
+		size = size - window
+		result1 = np.concatenate((result1, range(0, size)))
+		result2 = np.concatenate((result2, range(n-size, n)))
+		window = window * 2
+	return np.vstack((result1, result2))
+
+
 # # Usage of the functions
 # m = 168
 # n = 7
 # xx = np.concatenate((np.random.normal(0, 1, (m, 3)), np.zeros((m, 1))), axis = 1)
-# result = min_max_avg_sd(xx, 7)
+# result = min_max_avg_sd(xx, 8)
 # np.size(result)
