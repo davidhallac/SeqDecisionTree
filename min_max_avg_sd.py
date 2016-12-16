@@ -40,8 +40,8 @@ def avg_sd_result(list1, list2, n):
 def min_max_avg_sd(stats, n):
 	result_min = min_result(stats[:, 0], n)
 	result_max = max_result(stats[:, 1], n)
-	result_avg_sd = avg_sd_result(stats[:, 2], np.square(stats[:, 2]) + np.squares(stats[:, 3]), n)
-	# result_avg_sd = avg_sd_result(stats[:, 2], np.square(stats[:, 2]) + np.squares(stats[:, 3]) * (1-1/np.stats[:, 4]), n)
+	result_avg_sd = avg_sd_result(stats[:, 2], np.square(stats[:, 2]) + np.square(stats[:, 3]), n)
+	# result_avg_sd = avg_sd_result(stats[:, 2], np.square(stats[:, 2]) + np.square(stats[:, 3]) * (1-1/np.stats[:, 4]), n)
 	return np.concatenate((result_min, result_max, result_avg_sd))
 
 
