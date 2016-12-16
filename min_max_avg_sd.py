@@ -31,8 +31,6 @@ def avg_sd_result(list1, list2, n):
 	for iter in range(n):
 		temp1 = np.nanmean(np.array([temp1[0:(np.size(temp1)-window)], temp1[window:]]), axis = 0)
 		temp2 = np.nanmean(np.array([temp2[0:(np.size(temp2)-window)], temp2[window:]]), axis = 0)
-		# temp1 = (temp1[0:(np.size(temp1)-window)] + temp1[window:])/2
-		# temp2 = (temp2[0:(np.size(temp2)-window)] + temp2[window:])/2
 		result1 = np.concatenate((result1, temp1))
 		result2 = np.concatenate((result2, temp2))
 		window = window * 2
