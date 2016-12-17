@@ -70,8 +70,9 @@ def ParseBoiler(filename):
     dfOrig = pd.read_csv(filename,
                      parse_dates=[['Date','Time']], delimiter='\t')
     dfOrig2 = dfOrig.drop([0]) #TODO - remove this?
-    dfOrig2['Date_Time'] = pd.to_datetime(dfOrig2['Date_Time'], format='%d.%m.%Y %H:%M:%S', errors='coerce')
-    
+    dfOrig2['Date_Time'] = pd.to_datetime(dfOrig2['Date_Time'], format='%d.%m.%Y %H:%M:%S', coerce=True)
+    dfOrig2 = dfOrig2.dropna(subset=['Date_Time'])
+        
     #Only select the columns we care about
     dfSubset = dfOrig2[['Date_Time', 'Operating_status:_Error_Locking', 'Operating_status:_Error_Blocking',
                    'Actual_Power', 'Number_of_burner_starts', 'Operating_status:_Central_heating_active',
