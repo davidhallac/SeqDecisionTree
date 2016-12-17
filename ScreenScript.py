@@ -72,7 +72,7 @@ def ParseBoiler(filename):
     dfOrig2 = dfOrig.drop([0]) #TODO - remove this?
     dfOrig2['Date_Time'] = pd.to_datetime(dfOrig2['Date_Time'], format='%d.%m.%Y %H:%M:%S', coerce=True)
     dfOrig2 = dfOrig2.dropna(subset=['Date_Time'])
-        
+
     #Only select the columns we care about
     dfSubset = dfOrig2[['Date_Time', 'Operating_status:_Error_Locking', 'Operating_status:_Error_Blocking',
                    'Actual_Power', 'Number_of_burner_starts', 'Operating_status:_Central_heating_active',
@@ -145,22 +145,32 @@ def ParseBoiler(filename):
 
 def main():
 
-	#Parse ALL Boilers - TODO - unzip other folders too!
+	#Parse ALL Boilers
 	print "Starting All Boilers"
 	for filename in os.listdir('/dfs/scratch0/bosch/BG-Data_Part11/'):
-	     ParseBoiler('/dfs/scratch0/bosch/BG-Data_Part11/' + filename)
+	    parseFile = '/dfs/scratch0/bosch/BG-Data_Part11/' + filename
+	    if (os.stat(parseFile).st_size > 0):
+	        ParseBoiler(parseFile)
 	print "Finished Batch 11"
 	for filename in os.listdir('/dfs/scratch0/bosch/BG-Data_Part12/'):
-	     ParseBoiler('/dfs/scratch0/bosch/BG-Data_Part12/' + filename)
+	    parseFile = '/dfs/scratch0/bosch/BG-Data_Part12/' + filename
+	    if (os.stat(parseFile).st_size > 0):
+	        ParseBoiler(parseFile)
 	print "Finished Batch 12"
 	for filename in os.listdir('/dfs/scratch0/bosch/BG_Data_Part2/'):
-	     ParseBoiler('/dfs/scratch0/bosch/BG_Data_Part2/' + filename)
+	    parseFile = '/dfs/scratch0/bosch/BG_Data_Part2/' + filename
+	    if (os.stat(parseFile).st_size > 0):
+	        ParseBoiler(parseFile)
 	print "Finished Batch 2"
 	for filename in os.listdir('/dfs/scratch0/bosch/BG_Data_Part3/'):
-	     ParseBoiler('/dfs/scratch0/bosch/BG_Data_Part3/' + filename)
+	    parseFile = '/dfs/scratch0/bosch/BG_Data_Part3/' + filename
+	    if (os.stat(parseFile).st_size > 0):
+	        ParseBoiler(parseFile)
 	print "Finished Batch 3"
 	for filename in os.listdir('/dfs/scratch0/bosch/BG_Data_Part5/'):
-	     ParseBoiler('/dfs/scratch0/bosch/BG_Data_Part5/' + filename)
+	    parseFile = '/dfs/scratch0/bosch/BG_Data_Part5/' + filename
+	    if (os.stat(parseFile).st_size > 0):
+	        ParseBoiler(parseFile)
 	print "Finished Batch 5"
 
 
