@@ -144,7 +144,24 @@ def ParseBoiler(filename):
 
 def main():
 
-	ParseBoiler('/dfs/scratch0/bosch/BG-Data_Part11/2029718103746674690.csv')
+	#Parse ALL Boilers - TODO - unzip other folders too!
+	print "Starting All Boilers"
+	for filename in os.listdir('/dfs/scratch0/bosch/BG-Data_Part11/'):
+	     ParseBoiler(filename)
+	print "Finished Batch 11"
+	for filename in os.listdir('/dfs/scratch0/bosch/BG-Data_Part12/'):
+	     ParseBoiler(filename)
+	print "Finished Batch 12"
+	for filename in os.listdir('/dfs/scratch0/bosch/BG_Data_Part2/'):
+	     ParseBoiler(filename)
+	print "Finished Batch 2"
+	for filename in os.listdir('/dfs/scratch0/bosch/BG_Data_Part3/'):
+	     ParseBoiler(filename)
+	print "Finished Batch 3"
+	for filename in os.listdir('/dfs/scratch0/bosch/BG_Data_Part5/'):
+	     ParseBoiler(filename)
+	print "Finished Batch 5"
+
 
 
 
