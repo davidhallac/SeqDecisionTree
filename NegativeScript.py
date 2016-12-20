@@ -116,12 +116,12 @@ def ParseNegatives(directory,filename):
     Negative_result = np.zeros((numSamples, 4388 * len(sensorList))) 
     outer_iter = 0
     
-    startDataTime = df.iloc[[1]]['Date_Time'] #Since ix is one-based...
+    startDataTime = df.iloc[1]['Date_Time'] #Since ix is one-based...
     for i in range(numSamples):
 
         #Pick a random row
         rowNum = np.random.randint(1, numLines)
-        row  = df.iloc[[rowNum+1]]
+        row  = df.iloc[rowNum+1]
 
         #Keep re-picking random rows until conditions are met
         while (True):
