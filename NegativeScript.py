@@ -76,6 +76,12 @@ def col_ref_matrix(n):
 
 def ParseNegatives(directory,filename):
 
+    print directory + filename
+    print directory
+    print filename
+
+    1+j 
+    
     dfOrig2 = pd.read_csv(directory+filename,
                      parse_dates=[['Date','Time']], delimiter='\t')
     dfOrig2['Date_Time'] = pd.to_datetime(dfOrig2['Date_Time'], format='%d.%m.%Y %H:%M:%S', coerce=True)
