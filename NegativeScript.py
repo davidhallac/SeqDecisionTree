@@ -146,7 +146,7 @@ def ParseNegatives(directory,filename):
         
         d = {}
         for sensor in sensorList:
-            d["rawData_"+sensor] = np.zeros((168,4))
+            d["rawData_"+sensor] = np.zeros((168,5))
         
         for j in range(168):
 
@@ -162,7 +162,7 @@ def ParseNegatives(directory,filename):
                 d["rawData_"+sensor][j,1] = description['max']
                 d["rawData_"+sensor][j,2] = description['mean']
                 d["rawData_"+sensor][j,3] = description['std']
-#                 rawData[j,4] = description['count']
+                d["rawData_"+sensor][j,4] = description['count']
 
         inner_iter = 0
         for sensor in sensorList:
