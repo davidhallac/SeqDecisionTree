@@ -26,26 +26,34 @@ def max_result(list1, n):
     return result
 
 # list1, list2 are the average of the first and second moments of the datapoints
-def avg_sd_result(list1, list2, n):
+def avg_sd_result(list1, list2, list3, n):
     temp1 = list1
     temp2 = list2
+    temp3 = list3
     result1 = temp1
     result2 = temp2
     window = 1
     for iter in range(n):
-        temp1 = np.nanmean(np.array([temp1[0:(np.size(temp1)-window)], temp1[window:]]), axis = 0)
-        temp2 = np.nanmean(np.array([temp2[0:(np.size(temp2)-window)], temp2[window:]]), axis = 0)
+        temp1 = temp1 * temp3
+        temp2 = temp2 * temp3
+        temp1 = np.nansum(np.array([temp1[0:(np.size(temp1)-window)], temp1[window:]]), axis = 0)
+        temp2 = np.nansum(np.array([temp2[0:(np.size(temp2)-window)], temp2[window:]]), axis = 0)
+        temp3 = np.nansum(np.array([temp3[0:(np.size(temp3)-window)], temp3[window:]]), axis = 0)
+        temp4 = np.fmax(temp3, 1)
+        temp1 = temp1/temp4
+        temp2 = temp2/temp4
         result1 = np.concatenate((result1, temp1))
         result2 = np.concatenate((result2, temp2))
         window = window * 2
     result2 = np.sqrt(result2 - np.square(result1))
     return np.concatenate((result1, result2))
 
+
 def min_max_avg_sd(stats, n):
     result_min = min_result(stats[:, 0], n)
     result_max = max_result(stats[:, 1], n)
-    result_avg_sd = avg_sd_result(stats[:, 2], np.square(stats[:, 2]) + np.square(stats[:, 3]), n)
-    # result_avg_sd = avg_sd_result(stats[:, 2], np.square(stats[:, 2]) + np.square(stats[:, 3]) * (1-1/np.stats[:, 4]), n)
+    # result_avg_sd = avg_sd_result(stats[:, 2], np.square(stats[:, 2]) + np.square(stats[:, 3]), n)
+    result_avg_sd = avg_sd_result(stats[:, 2], np.square(stats[:, 2]) + np.square(stats[:, 3]) * (1-1/np.fmax(1, stats[:, 4])), stats[:, 4], n)
     return np.concatenate((result_min, result_max, result_avg_sd))
 
 
