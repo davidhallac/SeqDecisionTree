@@ -181,7 +181,7 @@ def main(argv):
     #     if (os.stat(parseFile).st_size > 0):
     #         ParseNegatives(argv[0],filename)
 
-    ParseNegatives('/dfs/scratch0/bosch/BG-Data_Part11/2029718103746674690.csv')
+    ParseNegatives('/dfs/scratch0/bosch/BG-Data_Part11/', '2029718103746674690.csv')
 
 
 
