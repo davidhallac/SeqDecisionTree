@@ -172,7 +172,7 @@ def ParseNegatives(directory,filename):
         outer_iter = outer_iter + 1
 
         
-    with open('NegativeData/NegativeExamples_'+file+'.txt','a') as f_handle:
+    with open('NegativeData/NegativeExamples_'+filename+'.txt','a') as f_handle:
         np.savetxt(f_handle,Negative_result, fmt='%1.3e')
 
 
