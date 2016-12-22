@@ -120,7 +120,7 @@ def ParseNegatives(directory,filename):
     for i in range(numSamples):
 
         #Pick a random row
-        rowNum = np.random.randint(1, numLines)
+        rowNum = np.random.randint(1, numLines-1)
         row  = df.iloc[rowNum+1]
 
         #Keep re-picking random rows until conditions are met
@@ -136,8 +136,8 @@ def ParseNegatives(directory,filename):
                 break
 
             else:
-                rowNum = np.random.randint(1, numLines)
-                row  = df.ix[rowNum]
+                rowNum = np.random.randint(1, numLines-1)
+                row  = df.iloc[rowNum+1]
 
         #For each Negative example...
         eventTime = row['Date_Time']
@@ -172,7 +172,7 @@ def ParseNegatives(directory,filename):
         outer_iter = outer_iter + 1
 
         
-    with open('NegativeData/NegativeExamples_'+filename+'.txt','a') as f_handle:
+    with open('NegativeData/NegativeExamples_'+filename,'a') as f_handle:
         np.savetxt(f_handle,Negative_result, fmt='%1.3e')
 
 
