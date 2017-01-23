@@ -70,7 +70,7 @@ for j in range(70208):
 		b = sum(i <= val for i in negSort)
 
 		# print a, b
-		tot = a + b
+		tot = max(a + b,0.1)
 		rest = max(posLength + negLength - a - b,0.1)
 		p1 = float(a)/float(tot)
 		p2 = float(posLength - a) / float(rest)
