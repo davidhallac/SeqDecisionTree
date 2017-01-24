@@ -9,32 +9,32 @@ import pydot
 from sklearn.externals.six import StringIO 
 
 
-#LOAD DATA
-posData = np.loadtxt('/dfs/scratch0/david/FengCollab/PositiveExamples.txt')
+# #LOAD DATA
+# posData = np.loadtxt('/dfs/scratch0/david/FengCollab/PositiveExamples.txt')
 
-print posData.shape
+# print posData.shape
 
-neg = []
+# neg = []
 
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029718095811051522.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720709734858753.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720710154289153.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720710254952449.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720710288506881.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720710691160065.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720754379030529.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720783118401538.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720788084457473.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720809945169922.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720811471896577.csv'))
-neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720812260425729.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029718095811051522.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720709734858753.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720710154289153.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720710254952449.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720710288506881.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720710691160065.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720754379030529.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720783118401538.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720788084457473.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720809945169922.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720811471896577.csv'))
+# neg.append(np.loadtxt('/dfs/scratch0/david/FengCollab/NegativeData/NegativeExamples_2029720812260425729.csv'))
 
 
-# posData = np.random.rand(100,1008)
+posData = np.random.rand(500,1008)
 
-# neg = [np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008)
-# , np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008)
-# , np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008)]
+neg = [np.random.rand(500,1008), np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008)
+, np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008)
+, np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008), np.random.rand(100,1008)]
 
 
 
@@ -45,7 +45,7 @@ negLength = negData.shape[0]
 
 p = float(posLength)/float(posLength+negLength)
 binEntropy = -p*math.log(p) - (1-p) * math.log(1-p)
-print "Original Entropy is", binEntropy, posLength, negLength
+print "Original Entropy is", binEntropy*(posLength+negLength), posLength, negLength
 
 #For each candidate, find the information gain
 entMin = 99999999999
@@ -86,7 +86,9 @@ for j in range(70208):
 			entSplit = val
 			print "New min entropy is", entMin, entFeat, entSplit, p1, a, p2, b
 
-		if (a < posLength and b < negLength):
+		if (math.isnan(val)):
+			break
+		elif (a < posLength and b < negLength):
 			val = min(posSort[a], negSort[b])
 		elif(a < posLength):
 			val = posSort[a]
@@ -94,6 +96,8 @@ for j in range(70208):
 			val = negSort[b]
 		else:
 			break
+
+
 
 	# X = np.concatenate((posex, negex), axis=0)
 
