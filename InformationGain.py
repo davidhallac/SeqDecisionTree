@@ -97,7 +97,7 @@ for j in range(70208):
 		else:
 			break
 
-	print "Done with", i, "Min entropy is", entMin, entFeat, entSplit, p1, a, p2, b
+	print "Done with", j, "Min entropy is", entMin, entFeat, entSplit, p1, a, p2, b
 
 
 
